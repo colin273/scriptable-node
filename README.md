@@ -52,7 +52,7 @@ Deprecated APIs in Scriptable will most likely not be supported by this module. 
 
 ## Design
 
-This module is designed to mimic the behavior of the real Scriptable app as closely as possible. Obviously, some things will work slightly differently, since this is running in a Node.JS environment in a terminal and not bridging to Swift APIs via JavaScriptCore.
+This module is designed to mimic the behavior of the real Scriptable app as closely as possible. Obviously, some things will work slightly differently, since this is running in a Node.JS environment in a terminal and not bridging to Swift APIs via JavaScriptCore. Also, when interacting with the file system, all file paths should use the POSIX format, even on Windows.
 
 ## System integration
 
@@ -69,12 +69,12 @@ If possible, the system default apps for mail, messaging, calendar, etc. should 
 
 This project can use all the help it can get. Pull requests to implement features are welcomed.
 
-Right now, there are a few urgent things to implement:
+Right now, there are a couple of things that urgently need to be finished:
 
-- `Data` - the foundation of everything. Most likely to be implemented as `ArrayBuffer`, although `Buffer` and `UInt8Array` are also options.
-- `Image` - relies heavily on `Data` and should be fairly easy once `Data` is complete.
+- `Data` - the foundation of a lot. This will be a wrapper for `Buffer`, at least for now. When this becomes an Electron app, I will either have it use `ArrayBuffer` everywhere or use `Buffer` or `Blob` depending on the environment.
+- `Image` - the calculation for the dimensions of an image needs to be implemented.
 
-After that, the long process of developing system-specific bridges begins.
+After that, the process of developing system-specific bridges begins.
 
 ## API checklist
 

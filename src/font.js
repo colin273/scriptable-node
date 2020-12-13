@@ -1,3 +1,5 @@
+// Haven't looked into the details of system font and title/headline/body/callout/footnote/caption sizes yet
+
 class Font {
   constructor(name, size) {
     this.name = name;
