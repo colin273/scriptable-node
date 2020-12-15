@@ -72,7 +72,7 @@ This project can use all the help it can get. Pull requests to implement feature
 Right now, there are a couple of things that urgently need to be finished:
 
 - `Data` - the foundation of a lot. This will be a wrapper for `Buffer`, at least for now. When this becomes an Electron app, I will either have it use `ArrayBuffer` everywhere or use `Buffer` or `Blob` depending on the environment.
-- `Image` - the calculation for the dimensions of an image needs to be implemented.
+- [All other items on this list have been completed]
 
 After that, the process of developing system-specific bridges begins.
 
