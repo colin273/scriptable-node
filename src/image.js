@@ -4,7 +4,8 @@ const Size = require('./size');
 class Image {
   constructor(data) {
     Object.defineProperty(this, '_data', {value: data});
-    // this.size = size of image, in pixels--read only
+    const imgSize = require('image-size')(data);
+    Object.defineProperty(this, 'size', {value: new Size(imgSize.width, imgSize.height)};
   }
 }
 

@@ -100,7 +100,7 @@ APIs with a check mark next to their names are "finished." This does not mean th
 - [ ] DrawContext
 - [ ] FileManager
 - [ ] Font
-- [ ] Image
+- [x] Image
 - [x] importModule
 - [ ] Keychain
 - [x] LinearGradient
