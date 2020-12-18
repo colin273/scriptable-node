@@ -78,7 +78,7 @@ After that, the process of developing system-specific bridges begins.
 
 ## API checklist
 
-APIs with a check mark next to their names are "finished." This does not mean that they are ready to use, as they may rely on unfinished APIs. Rather, it just means that no more code should be needed to get them working.
+APIs with a check mark next to their names are "finished." This does not mean that they are ready to use, as they may rely on unfinished APIs. Rather, it just means that no more code should be needed to get them working, and any further work on them is just debugging.
 
 - [ ] Alert
 - [ ] args

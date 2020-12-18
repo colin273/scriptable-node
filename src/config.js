@@ -1,9 +1,16 @@
 function getEnvironment() {
+  // For now, assume the environment is always the app, since this module only runs in Node.JS. When this becomes an actual app, with widgets, support for other environment types can be added.
+  return "app";
 }
 
-let environment = getEnvironment()
+const environment = getEnvironment();
 
 function getWidgetFamily() {
+  if (environment == "widget") {
+    // get widget family; for now, this block will never execute
+  } else {
+    return undefined;
+  }
 }
 
 module.exports = {

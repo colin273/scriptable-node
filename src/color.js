@@ -22,19 +22,30 @@ class Color {
     var b = parseInt(blue, 10).toString(16).slice(-2);
     if (b.length == 1) b = "0" + b;
 
-    Object.defineProperty(this, "hex", {value: (r + g + b).toUpperCase());
+    Object.defineProperty(this, "hex", {
+      enumerable: true,
+      value: (r + g + b).toUpperCase()
+    });
 
-    Object.defineProperty(this, "red", {value: parsedHex.red / 255});
+    Object.defineProperty(this, "red", {
+      enumerable: true,
+      value: parsedHex.red / 255
+    });
 
-    Object.defineProperty(this, "green", {value: parsedHex.green / 255});
+    Object.defineProperty(this, "green", {
+      enumerable: true,
+      value: parsedHex.green / 255
+    });
 
-    Object.defineProperty(this, "blue", {value: parsedHex.blue / 255});
+    Object.defineProperty(this, "blue", {
+      enumerable: true, 
+      value: parsedHex.blue / 255
+    });
     
-    if (alpha == undefined) {
-      Object.defineProperty(this, "alpha", {value: alpha});
-    } else {
-      Object.defineProperty(this, "alpha", {value: parsedHex.alpha});
-    }
+    Object.defineProperty(this, "alpha", {
+      enumerable: true,
+      value: (alpha == undefined) ? parsedHex.alpha : alpha
+    });
   }
 
   static black() {
