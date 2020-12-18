@@ -2,7 +2,10 @@ const open = require('open');
 
 class CallbackURL {
   constructor(baseURL) {
-    this._url = new URL(baseURL);
+    Object.defineProperty(this, "_url", {
+      value: new URL(baseURL),
+      writable: true
+    });
     this._url.search = '';
   }
 
@@ -17,8 +20,9 @@ class CallbackURL {
 
   getURL() {
     this._url.searchParams.set('x-source', 'Scriptable');
-    for (i of ["success", "error", "cancel"]) {
-      this._url.searchParams.set(`x-${i}`, `scriptable://x-callback-url/${i}`);
+    const paramArray = ["success", "error", "cancel"];
+    for (var i = 0; i < 3; i++) {
+      this._url.searchParams.set(`x-${paramArray[i]}`, `scriptable://x-callback-url/${paramArray[i]}`);
     }
     return this._url.toString();
   }
