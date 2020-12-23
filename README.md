@@ -92,7 +92,7 @@ APIs with a check mark next to their names are "finished." This does not mean th
 - [ ] ContactsContainer
 - [ ] ContactsGroup
 - [ ] Data
-- [ ] DateFormatter
+- [x] DateFormatter
 - [ ] DatePicker
 - [ ] Device
 - [ ] Dictation
@@ -108,7 +108,7 @@ APIs with a check mark next to their names are "finished." This does not mean th
 - [ ] Location
 - [ ] Mail
 - [ ] Message
-- [ ] module
+- [x] module
 - [ ] Notification
 - [ ] Pasteboard
 - [ ] Path

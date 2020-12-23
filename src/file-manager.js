@@ -24,7 +24,7 @@ To do:
 */
 
 const Data = require('./data.js');
-const fs = require('fs);
+const fs = require('fs');
 const Image = require('./image.js');
 const os = require('os');
 const path = require('path/posix');

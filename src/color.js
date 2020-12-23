@@ -13,13 +13,13 @@ class Color {
 
     // RGB to hex: https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/ConvertRGBtoHTMLColor.html
 
-    var r = parseInt(red, 10).toString(16).slice(-2);
+    let r = parseInt(red, 10).toString(16).slice(-2);
     if (r.length == 1) r = "0" + r;
 
-    var g = parseInt(green, 10).toString(16).slice(-2);
+    let g = parseInt(green, 10).toString(16).slice(-2);
     if (g.length == 1) g = "0" + g;
 
-    var b = parseInt(blue, 10).toString(16).slice(-2);
+    let b = parseInt(blue, 10).toString(16).slice(-2);
     if (b.length == 1) b = "0" + b;
 
     Object.defineProperty(this, "hex", {

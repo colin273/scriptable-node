@@ -1,4 +1,4 @@
-const open = require('open');
+const querystring = require('querystring');
 
 class CallbackURL {
   constructor(baseURL) {
@@ -14,8 +14,19 @@ class CallbackURL {
   }
 
   async open() {
-    // Need to add support for getting returned values from target app
-    await open(this.getURL(), {wait: true});
+    if (process.platform == "darwin") {
+      // Open x-callback URL and return response
+      const appPath = require('path').normalize(`${__dirname}/../lib/xcall.app/Contents/MacOS/xcall`);
+      require('child_process').execFile(appPath, ["-url", this.getURL()], (error, stdout, stderr) => {
+        if (error == null) {
+          return stdout;
+        } else {
+          throw error;
+        }
+      });
+    } else {
+      throw new Error(`x-callback-url not supported on platform '${process.platform}.`);
+    }
   }
 
   getURL() {

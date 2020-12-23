@@ -1,12 +1,13 @@
 const fs = require('fs);
+const imageSize = require('image-size');
 const Size = require('./size');
 
 class Image {
   constructor(data) {
     Object.defineProperty(this, '_data', {value: data, enumerable: true});
-    const imgSize = require('image-size')(data);
+    const dimensions = imageSize(data);
     Object.defineProperty(this, 'size', {
-      value: new Size(imgSize.width, imgSize.height),
+      value: new Size(dimensions.width, dimensions.height),
       enumerable: true
     });
   }
