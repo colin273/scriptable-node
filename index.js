@@ -38,9 +38,7 @@ exports.Font = require('./src/font.js');
 
 exports.Image = require('./src/image.js');
 
-exports.importModule = function (name) {
-  return require(name);
-}
+exports.importModule = require;
 
 exports.Keychain = require('./src/keychain.js');
 
@@ -53,8 +51,6 @@ exports.Location = require('./src/location.js');
 exports.Mail = require('./src/mail.js');
 
 exports.Message = require('./src/message.js');
-
-// module.filename is the only property of module that is undefined in Node.JS; best way to define this property?
 
 exports.Notification = require('./src/notification.js');
 
@@ -110,7 +106,7 @@ exports.UUID = {
 
 exports.WebView = require('./src/web-view.js');
 
-exports.XMLParser = require(./src/xml-parser.js');
+exports.XMLParser = require('./src/xml-parser.js');
 
 // Global functions for the console
 

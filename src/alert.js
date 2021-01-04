@@ -1,7 +1,8 @@
 const readline = require('readline');
 
 async function shellPresent(alertType) {
-  
+  // Need to create a command line interface to simulate the fields and options of an Alert
+  // Support for actual UI alerts may come later.
 }
 
 class Alert {
