@@ -14,6 +14,10 @@ class XMLParser {
         }
 
         this.string = string;
+
+        Object.defineProperty(this, "didStartDocument", {
+            writable: true
+        })
     }
 
     get didEndDocument() {
