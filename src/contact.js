@@ -1,6 +1,8 @@
 class Contact {
   constructor() {
-    this.identifier =  "";
+    Object.defineProperty(this, "identifier", {
+      value: ""
+    });
     this.namePrefix = "";
     this.givenName = "";
     this.middleName = "";
