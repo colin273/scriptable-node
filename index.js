@@ -109,11 +109,6 @@ exports.WebView = require('./src/web-view.js');
 exports.XMLParser = require('./src/xml-parser.js');
 
 // Global functions for the console
-
-exports.logError = function (message) {
-  console.error(message);
-}
-
-exports.logWarning = function (message) {
-  console.warn(message);
-}
+exports.log = console.log;
+exports.logError = console.error;
+exports.logWarning = console.warn;
