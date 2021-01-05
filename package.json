@@ -1,0 +1,36 @@
+{
+  "name": "scriptable-node",
+  "version": "1.0.0",
+  "description": "Porting the APIs from Scriptable on iOS to Node.JS for all platforms.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "brightness": "^3.0.0",
+    "canvas": "^2.6.1",
+    "computer-name": "^0.1.0",
+    "date-fns": "^2.16.1",
+    "hex-rgb": "^4.2.0",
+    "image-size": "^0.9.3",
+    "node-fetch": "^2.6.1",
+    "open": "^7.3.0",
+    "sax": "^1.2.4",
+    "say": "^0.16.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FifiTheBulldog/scriptable-node.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FifiTheBulldog/scriptable-node/issues"
+  },
+  "homepage": "https://github.com/FifiTheBulldog/scriptable-node#readme"
+}

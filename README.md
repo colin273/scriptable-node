@@ -138,4 +138,4 @@ APIs with a check mark next to their names are "finished." This does not mean th
 - [x] WidgetSpacer
 - [x] WidgetStack
 - [x] WidgetText
-- [ ] XMLParser
+- [x] XMLParser
