@@ -7,7 +7,10 @@ class Mail {
     this.preferredSendingEmailAddress = null;
     this.subject = "";
     this.toRecipients = [];
-    this._attachments = [];
+    Object.defineProperty(this, "_attachments", {
+      value: [],
+      writable: true
+    });
   }
 
   addDataAttachment(data, mimeType, filename) {

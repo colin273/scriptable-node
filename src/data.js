@@ -5,10 +5,12 @@ To do:
 - fromJPEG
 - fromPNG
 
-It appears that both of these involve converting the image to the format that the method specifies. Need to find a good method for that.
+It appears that both of these involve converting the image to the format that the method specifies before extracting the data.
+Need to find a good method for that.
 */
 
 const fs = require('fs');
+const Jimp = require('jimp');
 
 class Data {
   constructor(data) {

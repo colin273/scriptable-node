@@ -1,7 +1,10 @@
 class UITable {
   constructor() {
     this.showSeparators = false;
-    this._rows = [];
+    Object.defineProperty(this, "_rows", {
+      value: [],
+      writable: true
+    });
   }
   
   addRow(row) {

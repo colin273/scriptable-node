@@ -8,7 +8,11 @@ class UITableRow {
     this.height = 44;
     this.isHeader = false;
     this.onSelect = null;
-    this._cells = [];
+    Object.defineProperty(this, "_cells", {
+      value: [],
+      enumerable: false,
+      writable: true
+    });
   }
 
   addButton(title) {

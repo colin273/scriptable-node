@@ -11,7 +11,8 @@ class Color {
 
     const blue = parsedHex.blue / 255;
 
-    // RGB to hex: https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/ConvertRGBtoHTMLColor.html
+    // RGB to hex:
+    // https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/ConvertRGBtoHTMLColor.html
 
     let r = parseInt(red, 10).toString(16).slice(-2);
     if (r.length == 1) r = "0" + r;
@@ -22,29 +23,27 @@ class Color {
     let b = parseInt(blue, 10).toString(16).slice(-2);
     if (b.length == 1) b = "0" + b;
 
-    Object.defineProperty(this, "hex", {
-      enumerable: true,
-      value: (r + g + b).toUpperCase()
-    });
-
-    Object.defineProperty(this, "red", {
-      enumerable: true,
-      value: parsedHex.red / 255
-    });
-
-    Object.defineProperty(this, "green", {
-      enumerable: true,
-      value: parsedHex.green / 255
-    });
-
-    Object.defineProperty(this, "blue", {
-      enumerable: true, 
-      value: parsedHex.blue / 255
-    });
-    
-    Object.defineProperty(this, "alpha", {
-      enumerable: true,
-      value: (alpha == undefined) ? parsedHex.alpha : alpha
+    Object.defineProperties(this, "hex", {
+      hex: {
+        enumerable: true,
+        value: (r + g + b).toUpperCase()
+      },
+      red: {
+        value: parsedHex.red / 255,
+        enumerable: true
+      },
+      green: {
+        enumerable: true,
+        value: parsedHex.green / 255
+      },
+      blue: {
+        enumerable: true, 
+        value: parsedHex.blue / 255
+      },
+      alpha: {
+        enumerable: true,
+        value: (alpha == undefined) ? parsedHex.alpha : alpha
+      }
     });
   }
 

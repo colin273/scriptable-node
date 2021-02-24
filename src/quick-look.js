@@ -15,6 +15,7 @@ exports.present = async function (item, fullscreen) {
       await require('child_process').execFile("qlmanage", ["-p", item]);
     } else {
       console.log("scriptable-node does not currently support Quick Look for this type.");
+    }
   } else {
     console.log(`Quick Look is not supported on the platform '${process.platform}'.`);
   }

@@ -13,13 +13,13 @@
     "date-fns": "^2.16.1",
     "hex-rgb": "^4.2.0",
     "image-size": "^0.9.3",
+    "jimp": "^0.16.1",
     "node-fetch": "^2.6.1",
     "open": "^7.3.0",
     "sax": "^1.2.4",
     "say": "^0.16.0",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

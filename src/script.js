@@ -1,6 +1,9 @@
+const path = require('path');
+
 module.exports = {
   name: function() {
-    // Return the name of the script
+    const fileName = require.main.filename;
+    return path.basename(fileName, path.extname(fileName));
   },
 
   complete: function() {

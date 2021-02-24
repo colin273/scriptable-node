@@ -10,7 +10,10 @@ class UITableCell {
     this.titleFont = null;
     this.widthWeight = 0;
     this._align = "left";
-    this._type = type;
+    Object.defineProperty(this, "_type", {
+      value: type,
+      writable: true
+    });
   }
 
   centerAligned() {

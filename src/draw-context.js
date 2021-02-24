@@ -1,3 +1,4 @@
+const { createCanvas } = require('canvas');
 const Size = require('./size');
 
 class DrawContext {
@@ -5,6 +6,16 @@ class DrawContext {
     this.size = new Size(200, 200);
     this.respectScreenScale = false;
     this.opaque = true;
+    Object.defineProperties(this, {
+      _canvas: {
+        writable: true,
+        value: createCanvas()
+      },
+      _ctx: {
+        writable: true,
+        value: this._canvas.getContext('2d')
+      }
+    });
   }
 
   getImage() {
@@ -20,6 +31,7 @@ class DrawContext {
   }
 
   setStrokeColor(color) {
+    this._ctx.strokeStyle = color.hex;
   }
 
   setLineWidth(width) {

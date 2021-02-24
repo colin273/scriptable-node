@@ -1,5 +1,8 @@
+const Data = require('./data.js');
 const fetch = require('node-fetch');
 const Image = require('./image.js');
+
+async function getBody(request) {}
 
 class Request {
   constructor(url) {
@@ -12,18 +15,27 @@ class Request {
   }
 
   async load() {
+    const body = await getBody(this);
+    const requestData = await body.buffer();
+    return new Data(requestData);
   }
 
   async loadString() {
-    return (await this.load()).toString('utf8');
+    const body = await getBody(this);
+    const string = await body.text();
+    return string;
   }
 
   async loadJSON() {
-    return JSON.parse(await this.loadString());
+    const body = await getBody(this);
+    const json = await body.json();
+    return json;
   }
 
   async loadImage() {
-    return Image.fromData(await this.load());
+    const body = await getBody(this);
+    const requestData = await body.buffer();
+    return new Image(requestData);
   }
 
   addParameterToMultipart(name, value) {

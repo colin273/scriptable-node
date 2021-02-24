@@ -2,9 +2,20 @@ const Font = require('./font.js');
 
 class SFSymbol {
   constructor(name) {
-    this._name = name;
-    this._weight = "regular";
-    this._font = Font.body();
+    Object.defineProperties(this, {
+      _name: {
+        value: name,
+        writable: true
+      },
+      _weight: {
+        value: "regular",
+        writable: true
+      },
+      _font: {
+        value: Font.body(),
+        writable: true
+      }
+    })
   }
 
   get image() {

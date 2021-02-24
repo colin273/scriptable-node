@@ -37,7 +37,10 @@ class WidgetWrite {
     this.shadowRadius = 0;
     this.shadowOffset = new Point(0, 0);
     this.url = null;
-    this._align = "left";
+    Object.defineProperty(this, "_align", {
+      value: "left",
+      writable: true
+    })
   }
 
   leftAlignText() {

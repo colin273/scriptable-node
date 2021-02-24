@@ -3,14 +3,17 @@ class CalendarEvent {
     this.title = "Created with Scriptable";
     this.location = null;
     this.notes = null;
-    this.startDate = ; // Figure out what is going on here
-    this.endDate = ; // Figure out what is going on here
+    this.startDate = (new Date()).setMinutes(new Date().getMinutes + 30);
+    this.endDate = this.endDate;
     this.isAllDay = false;
     this.attendees = null;
     this.availability = "notSupported";
-    this.timeZone = ""; // What do I do here?
+    this.timeZone = null;
     this.calendar = null;
-    this._recurrence = [];
+    Object.defineProperty(this, "_recurrence", {
+      value: [],
+      writable: true,
+    });
   }
 
   addRecurrenceRule(recurrenceRule) {

@@ -1,7 +1,10 @@
 class ContactsGroup {
   constructor() {
     this.name = "";
-    this._contacts = [];
+    Object.defineProperty(this, "_contacts", {
+      value: [],
+      writable: true
+    });
   }
 
   static async all(containers) {

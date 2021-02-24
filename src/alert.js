@@ -9,15 +9,15 @@ class Alert {
   constructor() {
     this.title = null;
     this.message = null;
-    Object.defineProperty(this, "_actions", {
-      value: [],
-      writable: true,
-      enumerable: false
-    });
-    Object.defineProperty(this, "_fields", {
-      value: [],
-      writable: true,
-      enumerable: false
+    Object.defineProperties(this, "_actions", {
+      _actions: {
+        value: [],
+        writable: true,
+      },
+      _fields: {
+        value: [],
+        writable: true
+      }
     });
   }
 

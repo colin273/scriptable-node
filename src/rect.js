@@ -28,7 +28,7 @@ class Rect {
     this.y = p.y;
   }
   get size() {
-    return new Size(this.width, this.height)l
+    return new Size(this.width, this.height)
   }
   set size(s) {
     this.width = s.width;
