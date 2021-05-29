@@ -17,7 +17,7 @@ class Request {
   async load() {
     const body = await getBody(this);
     const requestData = await body.buffer();
-    return new Data(requestData);
+    return Data._fromBuffer(requestData);
   }
 
   async loadString() {

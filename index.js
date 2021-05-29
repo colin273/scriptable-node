@@ -85,7 +85,7 @@ exports.ShareSheet = require('./src/share-sheet.js');
 exports.Size = require('./src/size.js');
 
 exports.Speech = {
-  speak: function(text) {
+  speak: function (text) {
     require('say').speak(text);
   }
 }
@@ -108,7 +108,44 @@ exports.WebView = require('./src/web-view.js');
 
 exports.XMLParser = require('./src/xml-parser.js');
 
-// Global functions for the console
-exports.log = console.log;
-exports.logError = console.error;
-exports.logWarning = console.warn;
+/*
+Global functions for the console
+
+_scriptable_log, _scriptable_logError, and _scriptable_logWarning
+are the undocumented internal functions used in the real Scriptable app
+that actually log things to the console.
+*/
+exports.log = exports._scriptable_log = console.log;
+exports.logError = exports._scriptable_logError = console.error;
+exports.logWarning = exports._scriptable_logWarning = console.warn;
+
+// A few undocumented items
+exports.App = {
+  close: function () {} // Does nothing for now; maybe later?
+}
+
+// Create and log deprecation messages
+exports._scriptable_deprecation = function (itemName, version, message) {
+  console.warn(`${itemName} was deprecated in version ${version}. ${message}`)
+}
+
+// Convert everything to a string, like Scriptable does for its console
+exports._scriptable_createLogMessage = function (obj) {
+  if (typeof obj === "object") {
+    return JSON.stringify(obj)
+  } else {
+    return String(obj)
+  }
+}
+
+// The next few things are specific to the Scriptable environment.
+// They really have no reason to be here, except because.
+
+// The mother of all functions in Scriptable--runs the script.
+exports._scriptable_run = async function () {
+  // Run the script. 
+}
+
+// I have no idea what these do yet, but I'll add them here for now
+exports._scriptable_didRun = function () {}
+exports.dispatch = function () {}

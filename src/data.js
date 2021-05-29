@@ -47,5 +47,9 @@ module.exports = {
   },
 
   fromPNG: function(image) {
+  },
+
+  _fromBuffer: function(buffer) {
+    return new Data(buffer)
   }
 }
