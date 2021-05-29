@@ -1,4 +1,4 @@
-const encodedName = encodeURIComponent(require('path').basename(process.argv[1], '.js'));
+const encodedName = encodeURIComponent(require('path').basename(require.main.filename));
 
 module.exports = {
   forOpeningScript: function() {
