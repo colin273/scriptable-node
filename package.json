@@ -7,13 +7,12 @@
     "lib": "lib"
   },
   "dependencies": {
-    "brightness": "^3.0.0",
+    "brightness": "^2.2.0",
     "canvas": "^2.6.1",
     "computer-name": "^0.1.0",
     "date-fns": "^2.16.1",
     "hex-rgb": "^4.2.0",
     "image-size": "^0.9.3",
-    "jimp": "^0.16.1",
     "node-fetch": "^2.6.1",
     "open": "^7.3.0",
     "sax": "^1.2.4",

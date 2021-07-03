@@ -2,9 +2,11 @@ const fs = require('fs');
 const imageSize = require('image-size');
 const Size = require('./size');
 
+const dataKey = Symbol.for("data")
+
 class Image {
   constructor(data) {
-    Object.defineProperty(this, '_data', {
+    Object.defineProperty(this, dataKey, {
       value: data
     });
     const dimensions = imageSize(data);
@@ -17,10 +19,18 @@ class Image {
 
 module.exports = {
   fromFile: function(filePath) {
-    return new Image(fs.readFileSync(filePath));
+    try {
+      return new Image(fs.readFileSync(filePath));
+    } catch {
+      return null
+    }
   },
 
   fromData: function(data) {
-    return new Image(data._data);
+    try {
+      return new Image(data[dataKey]);
+    } catch {
+      return null
+    }
   }
 }
