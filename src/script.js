@@ -1,20 +1,36 @@
 const path = require('path');
 
+const outputKey = Symbol("shortcutOutput")
+
 module.exports = {
   name: function() {
-    const fileName = require.main.filename;
-    return path.basename(fileName, path.extname(fileName));
+    if (require.main) {
+      const fileName = require.main.filename;
+      return path.basename(fileName, path.extname(fileName));
+    }
+    return module.id
   },
 
   complete: function() {
     // Inform the system that script has completed
+    // Does nothing for now
   },
 
   setShortcutOutput: function(value) {
-    // Set output of script
+    Object.defineProperty(this, outputKey, {
+      value: value,
+      writable: true
+    })
   },
 
   setWidget: function(widget) {
     // Update the widget to display with the widget passed as input
+    // Does nothing for now
+  },
+
+  shortcutOutput: function() {
+    return this[outputKey]
   }
 }
+
+module.exports.setShortcutOutput(null)

@@ -1,7 +1,5 @@
 exports.Alert = require('./src/alert.js');
 
-exports.args = require('./src/args.js');
-
 exports.Calendar = require('./src/calendar.js');
 
 exports.CalendarEvent = require('./src/calendar-event.js');
@@ -9,8 +7,6 @@ exports.CalendarEvent = require('./src/calendar-event.js');
 exports.CallbackURL = require('./src/callback-url.js');
 
 exports.Color = require('./src/color.js');
-
-exports.config = require('./src/config.js');
 
 exports.Contact = require('./src/contact.js');
 
@@ -131,21 +127,5 @@ exports._scriptable_deprecation = function (itemName, version, message) {
 
 // Convert everything to a string, like Scriptable does for its console
 exports._scriptable_createLogMessage = function (obj) {
-  if (typeof obj === "object") {
-    return JSON.stringify(obj)
-  } else {
-    return String(obj)
-  }
+  return (typeof obj === "object") ? JSON.stringify(obj) : String(obj)
 }
-
-// The next few things are specific to the Scriptable environment.
-// They really have no reason to be here, except because.
-
-// The mother of all functions in Scriptable--runs the script.
-exports._scriptable_run = async function () {
-  // Run the script. 
-}
-
-// I have no idea what these do yet, but I'll add them here for now
-exports._scriptable_didRun = function () {}
-exports.dispatch = function () {}
