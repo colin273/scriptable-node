@@ -1,6 +1,6 @@
 const path = require('path');
 
-const outputKey = Symbol("shortcutOutput")
+const outputKey = Symbol("output")
 
 module.exports = {
   name: function() {
