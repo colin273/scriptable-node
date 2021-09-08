@@ -1,44 +1,47 @@
+"use strict";
+
 class Timer {
-  constructor() {
-    this.timeInterval = 0;
-    this.repeats = false;
-  }
+    #type;
+    #timer;
 
-  schedule(callback) {
-    if (this.repeats) {
-      this._type = "interval";
-      this._timer = setInterval(callback, this.timeInterval);
-    } else {
-      if (this.timeInterval == 0) {
-        this._type = "immediate";
-        this._timer = setImmediate(callback);
-      } else {
-        this._type = "timeout";
-        this._timer = setTimeout(callback, this.timeInterval);
-      }
+    constructor() {
+        this.timeInterval = 0;
+        this.repeats = false;
     }
-  }
 
-  invalidate() {
-    switch (this._type) {
-      case "interval":
-        clearInterval(this._timer);
-        break;
-      case "immediate":
-        clearImmediate(this._timer);
-        break;
-      case "timeout":
-        clearTimeout(this._timer);
+    schedule(callback) {
+        if (this.repeats) {
+            this.#type = "interval";
+            this.#timer = setInterval(callback, this.timeInterval);
+        } else if (this.timeInterval == 0) {
+            this.#type = "immediate";
+            this.#timer = setImmediate(callback);
+        } else {
+            this.#type = "timeout";
+            this.#timer = setTimeout(callback, this.timeInterval);
+        }
     }
-  }
 
-  static schedule(timeInterval, repeats, callback) {
-    let t = new this();
-    t.timeInterval = timeInterval;
-    t.repeats = repeats;
-    t.schedule(callback);
-    return t;
-  }
+    invalidate() {
+        switch (this.#type) {
+            case "interval":
+                clearInterval(this.#timer);
+                break;
+            case "immediate":
+                clearImmediate(this.#timer);
+                break;
+            case "timeout":
+                clearTimeout(this.#timer);
+        }
+    }
+
+    static schedule(timeInterval, repeats, callback) {
+        const t = new this();
+        t.timeInterval = timeInterval;
+        t.repeats = repeats;
+        t.schedule(callback);
+        return t;
+    }
 }
 
 module.exports = Timer;

@@ -1,22 +1,31 @@
+"use strict";
+
+let accuracy = "best";
+
 module.exports = {
-  current: async function() {
-  },
+    current: async function () {
+    },
 
-  setAccuracyToBest: function() {
-  },
+    setAccuracyToBest: function () {
+        accuracy = "best";
+    },
 
-  setAccuracyToTenMeters: function() {
-  },
+    setAccuracyToTenMeters: function () {
+        accuracy = 10;
+    },
 
-  setAccuracyToHundredMeters: function() {
-  },
+    setAccuracyToHundredMeters: function () {
+        accuracy = 100;
+    },
 
-  setAccuracyToKilometer: function() {
-  },
+    setAccuracyToKilometer: function () {
+        accuracy = 1000;
+    },
 
-  setAccuracyToThreeKilometers: function() {
-  },
+    setAccuracyToThreeKilometers: function () {
+        accuracy = 3000;
+    },
 
-  reverseGeocode: async function(latitude, longitude, locale) {
-  }
+    reverseGeocode: async function (latitude, longitude, locale) {
+    }
 }

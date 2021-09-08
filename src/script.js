@@ -1,36 +1,33 @@
-const path = require('path');
+"use strict";
 
-const outputKey = Symbol("output")
+const path = require("path");
+let output = null;
 
 module.exports = {
-  name: function() {
-    if (require.main) {
-      const fileName = require.main.filename;
-      return path.basename(fileName, path.extname(fileName));
+    name: function () {
+        if (require.main) {
+            const fileName = require.main.filename;
+            return path.basename(fileName, path.extname(fileName));
+        }
+        return module.id;
+    },
+
+    complete: function () {
+        // Inform the system that script has completed
+        // Does nothing for now
+    },
+
+    setShortcutOutput: function (value) {
+        output = value;
+    },
+
+    setWidget: function (widget) {
+        // Update the widget to display with the widget passed as input
+        // Does nothing for now since widgets are not implemented
+        // (Who knows, will they ever be implemented? macOS maybe?)
+    },
+
+    shortcutOutput: function () {
+        return output;
     }
-    return module.id
-  },
-
-  complete: function() {
-    // Inform the system that script has completed
-    // Does nothing for now
-  },
-
-  setShortcutOutput: function(value) {
-    Object.defineProperty(this, outputKey, {
-      value: value,
-      writable: true
-    })
-  },
-
-  setWidget: function(widget) {
-    // Update the widget to display with the widget passed as input
-    // Does nothing for now
-  },
-
-  shortcutOutput: function() {
-    return this[outputKey]
-  }
-}
-
-module.exports.setShortcutOutput(null)
+};

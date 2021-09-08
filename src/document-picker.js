@@ -1,22 +1,22 @@
 module.exports = {
-  open: async function (types) {
-  },
+    open: async function (types) {
+    },
 
-  openFile: async function () {
-  },
+    openFile: async function () {
+    },
 
-  openFolder: async function () {
-  },
+    openFolder: async function () {
+    },
 
-  export: async function (path) {
-  },
+    export: async function (path) {
+    },
 
-  exportString: async function (content, name) {
-  },
+    exportString: async function (content, name) {
+    },
 
-  exportImage: async function (image, name) {
-  },
+    exportImage: async function (image, name) {
+    },
 
-  exportData: async function (data, name) {
-  }
+    exportData: async function (data, name) {
+    }
 }

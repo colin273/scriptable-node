@@ -1,78 +1,68 @@
-const sax = require('sax');
+const { parser } = require("sax");
+const scriptableTypeError = require("../util/type-error.js");
 
 class XMLParser {
+    #parser;
+
     constructor(string) {
-        Object.defineProperty(this, "_parser", {
-            value: sax.parser(),
-            writable: true
-        });
-
+        this.#parser = parser();
         const stringType = typeof string;
-        
         if (stringType != "string") {
-            throw new Error(`Expected value of type string but got value of type ${stringType}.`)
+            throw scriptableTypeError("string", stringType)
         }
-
         this.string = string;
-
-        Object.defineProperty(this, "didStartDocument", {
-            writable: true
-        })
     }
 
     get didEndDocument() {
-        return this._parser.onend;
+        return this.#parser.onend;
     }
 
     set didEndDocument(fn) {
-        this._parser.onend = fn;
+        this.#parser.onend = fn;
     }
 
     get didStartElement() {
-        return this._parser.onopentag;
+        return this.#parser.onopentag;
     }
 
     set didStartElement(fn) {
-        this._parser.onopentag = fn;
+        this.#parser.onopentag = fn;
     }
 
     get didEndElement() {
-        return this._parser.onclosetag;
+        return this.#parser.onclosetag;
     }
 
     set didEndElement(fn) {
-        this._parser.onclosetag = fn;
+        this.#parser.onclosetag = fn;
     }
 
     get foundCharacters() {
-        return this._parser.ontext;
+        return this.#parser.ontext;
     }
 
     set foundCharacters(fn) {
-        this._parser.ontext = fn;
+        this.#parser.ontext = fn;
     }
 
     get parseErrorOccurred() {
-        return this._parser.onerror;
+        return this.#parser.onerror;
     }
 
     set parseErrorOccurred(fn) {
-        this._parser.onerror = fn;
+        this.#parser.onerror = fn;
     }
 
     parse() {
         try {
+            this.#parser.write(this.string).close();
             if (this.didStartDocument) {
                 this.didStartDocument();
             }
-    
-            this._parser.write(this.string).close();
-
             return true;
         } catch {
             return false;
         }
-        
     }
 }
 

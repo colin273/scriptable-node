@@ -1,19 +1,25 @@
+"use strict";
+
+const { writeSync, readSync } = require("clipboardy");
+
 module.exports = {
-  copy: function(string) {
-  },
+    copy: function () {
+        this.copyString(string);
+    },
 
-  paste: function() {
-  },
+    paste: function () {
+        return this.pasteString();
+    },
 
-  copyString: function(string) {
-  },
+    copyString: function () {
+        writeSync(string);
+    },
 
-  pasteString: function() {
-  },
+    pasteString: function () {
+        return readSync();
+    },
 
-  copyImage: function(image) {
-  },
+    copyImage: function () {},
 
-  pasteImage: function() {
-  }
-}
+    pasteImage: function () {}
+};

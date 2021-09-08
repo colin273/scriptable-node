@@ -1,78 +1,73 @@
-const readline = require('readline');
+"use strict";
+
+const readline = require("readline");
+
+const TextField = require("./text-field.js");
 
 async function shellPresent(alertType) {
-  // Need to create a command line interface to simulate the fields and options of an Alert
-  // Support for actual UI alerts may come later.
+    // Need to create a command line interface to simulate the fields and options of an Alert
+    // Support for actual UI alerts may come later.
+}
+
+class Action {
+    constructor(title, type) {
+        this.title = title;
+        this.type = type;
+    }
 }
 
 class Alert {
-  constructor() {
-    this.title = null;
-    this.message = null;
-    Object.defineProperties(this, "_actions", {
-      _actions: {
-        value: [],
-        writable: true,
-      },
-      _fields: {
-        value: [],
-        writable: true
-      }
-    });
-  }
+    #actions;
+    #fields;
+    #values;
 
-  addAction(title) {
-    this._actions.push({
-      title: title,
-      type: "action"
-    });
-  }
+    constructor() {
+        this.title = null;
+        this.message = null;
+        this.#actions = [];
+        this.#fields = [];
+        this.#values = [];
+    }
 
-  addDestructiveAction(title) {
-    this._actions.push({
-      title: title,
-      type: "destructive"
-    });
-  }
+    addAction(title) {
+        this.#actions.push(new Action(title, "action"));
+    }
 
-  addCancelAction(title) {
-    this._actions.push({
-      title: title,
-      type: "cancel"
-    });
-  }
+    addDestructiveAction(title) {
+        this.#actions.push(new Action(title, "destructive"));
+    }
 
-  addTextField(placeholder, text) {
-    this._fields.push({
-      placeholder: placeholder,
-      default: text,
-      type: "action"
-    });
-  }
+    addCancelAction(title) {
+        this.#actions.push(new Action(title, "cancel"));;
+    }
 
-  addSecureTextField(placeholder, text) {
-    this._fields.push({
-      placeholder: placeholder,
-      default: text,
-      type: "secure"
-    });
-  }
+    addTextField(placeholder, text) {
+        const field = new TextField(placeholder, text, false);
+        this.#fields.push(field);
+        return field;
+    }
 
-  textFieldValue(index) {
-    return this._fields[index].value;
-  }
+    addSecureTextField(placeholder, text) {
+        const field = new TextField(placeholder, text, true);
+        this.#fields.push(field);
+        return field;
+    }
 
-  async present() {
-    return (await this.presentAlert());
-  }
+    textFieldValue(index) {
+        return this.#values[index];
+    }
 
-  async presentAlert() {
-    return (await shellPresent("alert"));
-  }
+    async present() {
+        return (await this.presentAlert());
+    }
 
-  async presentSheet() {
-    return (await shellPresent("sheet"));
-  }
+    async presentAlert() {
+        return (await shellPresent("alert"));
+    }
+
+    async presentSheet() {
+        return (await shellPresent("sheet"));
+    }
 }
 
 module.exports = Alert;

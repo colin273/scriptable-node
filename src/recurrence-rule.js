@@ -2,66 +2,66 @@ class RecurrenceRule {
 }
 
 module.exports = {
-  daily: function(interval) {
-  },
+    daily: function(interval) {
+    },
 
-  dailyEndDate: function(interval, endDate) {
-  },
+    dailyEndDate: function(interval, endDate) {
+    },
 
-  dailyOccurrenceCount: function(interval, occurrenceCount) {
-  },
+    dailyOccurrenceCount: function(interval, occurrenceCount) {
+    },
 
-  weekly: function(interval) {
-  },
+    weekly: function(interval) {
+    },
 
-  weeklyEndDate: function(interval, endDate) {
-  },
+    weeklyEndDate: function(interval, endDate) {
+    },
 
-  weeklyOccurrenceCount: function(interval, occurrenceCount) {
-  },
+    weeklyOccurrenceCount: function(interval, occurrenceCount) {
+    },
 
-  monthly: function(interval) {
-  },
+    monthly: function(interval) {
+    },
 
-  monthlyEndDate: function(interval, endDate) {
-  },
+    monthlyEndDate: function(interval, endDate) {
+    },
 
-  monthlyOccurrenceCount: function(interval, occurrenceCount) {
-  },
+    monthlyOccurrenceCount: function(interval, occurrenceCount) {
+    },
 
-  yearly: function(interval) {
-  },
+    yearly: function(interval) {
+    },
 
-  yearlyEndDate: function(interval, endDate) {
-  },
+    yearlyEndDate: function(interval, endDate) {
+    },
 
-  yearlyOccurrenceCount: function(interval, occurrenceCount) {
-  },
+    yearlyOccurrenceCount: function(interval, occurrenceCount) {
+    },
 
-  complexWeekly: function(interval, daysOfTheWeek, setPositions) {
-  },
+    complexWeekly: function(interval, daysOfTheWeek, setPositions) {
+    },
 
-  complexWeeklyEndDate: function(interval, daysOfTheWeek, setPositions, endDate) {
-  },
+    complexWeeklyEndDate: function(interval, daysOfTheWeek, setPositions, endDate) {
+    },
 
-  complexWeeklyOccurrenceCount: function(interval, daysOfTheWeek, setPositions, occurrenceCount) {
-  },
+    complexWeeklyOccurrenceCount: function(interval, daysOfTheWeek, setPositions, occurrenceCount) {
+    },
 
-  complexMonthly: function(interval, daysOfTheWeek, daysOfTheMonth, setPositions) {
-  },
+    complexMonthly: function(interval, daysOfTheWeek, daysOfTheMonth, setPositions) {
+    },
 
-  complexMonthlyEndDate: function(interval, daysOfTheWeek, daysOfTheMonth, setPositions, endDate) {
-  },
+    complexMonthlyEndDate: function(interval, daysOfTheWeek, daysOfTheMonth, setPositions, endDate) {
+    },
 
-  complexWeeklyOccurrenceCount: function(interval, daysOfTheWeek, daysOfTheMonth, setPositions, occurrenceCount) {
-  },
+    complexWeeklyOccurrenceCount: function(interval, daysOfTheWeek, daysOfTheMonth, setPositions, occurrenceCount) {
+    },
 
-  complexYearly: function(interval, daysOfTheWeek, monthsOfTheYear, weeksOfTheYear, daysOfTheYear, setPositions) {
-  },
+    complexYearly: function(interval, daysOfTheWeek, monthsOfTheYear, weeksOfTheYear, daysOfTheYear, setPositions) {
+    },
 
-  complexYearlyEndDate: function(interval, daysOfTheWeek, monthsOfTheYear, weeksOfTheYear, daysOfTheYear, setPositions, endDate) {
-  },
+    complexYearlyEndDate: function(interval, daysOfTheWeek, monthsOfTheYear, weeksOfTheYear, daysOfTheYear, setPositions, endDate) {
+    },
 
-  complexYearlyOccurrenceCount: function(interval, daysOfTheWeek, monthsOfTheYear, weeksOfTheYear, daysOfTheYear, setPositions, occurrenceCount) {
-  }
+    complexYearlyOccurrenceCount: function(interval, daysOfTheWeek, monthsOfTheYear, weeksOfTheYear, daysOfTheYear, setPositions, occurrenceCount) {
+    }
 }

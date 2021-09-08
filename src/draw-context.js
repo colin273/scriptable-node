@@ -2,88 +2,83 @@ const { createCanvas } = require('canvas');
 const Size = require('./size');
 
 class DrawContext {
-  constructor() {
-    this.size = new Size(200, 200);
-    this.respectScreenScale = false;
-    this.opaque = true;
-    Object.defineProperties(this, {
-      _canvas: {
-        writable: true,
-        value: createCanvas()
-      },
-      _ctx: {
-        writable: true,
-        value: this._canvas.getContext('2d')
-      }
-    });
-  }
+    #canvas;
+    #ctx;
 
-  getImage() {
-  }
+    constructor() {
+        this.size = new Size(200, 200);
+        this.respectScreenScale = false;
+        this.opaque = true;
+        this.#canvas = createCanvas();
+        this.#ctx = this.#canvas.getContext('2d');
+    }
 
-  drawImageInRect(image, rect) {
-  }
+    getImage() {
+    }
 
-  drawImageAtPoint(image, point) {
-  }
+    drawImageInRect(image, rect) {
+    }
 
-  setFillColor(color) {
-  }
+    drawImageAtPoint(image, point) {
+    }
 
-  setStrokeColor(color) {
-    this._ctx.strokeStyle = color.hex;
-  }
+    setFillColor(color) {
+    }
 
-  setLineWidth(width) {
-  }
+    setStrokeColor(color) {
+        this.#ctx.strokeStyle = color.hex;
+    }
 
-  fill(rect) {
-  }
+    setLineWidth(width) {
+    }
 
-  fillRect(rect) {
-  }
+    fill(rect) {
+    }
 
-  fillElipse(rect) {
-  }
+    fillRect(rect) {
+    }
 
-  stroke(rect) {
-  }
+    fillElipse(rect) {
+    }
 
-  strokeRect(rect) {
-  }
+    stroke(rect) {
+    }
 
-  strokeEllipse(rect) {
-  }
+    strokeRect(rect) {
+    }
 
-  addPath(path) {
-  }
+    strokeEllipse(rect) {
+    }
 
-  strokePath() {
-  }
+    addPath(path) {
+    }
 
-  fillPath() {
-  }
+    strokePath() {
+    }
 
-  drawText(text, pos) {
-  }
+    fillPath() {
+    }
 
-  drawTextInRect(text, rect) {
-  }
+    drawText(text, pos) {
+    }
 
-  setFont(font) {
-  }
+    drawTextInRect(text, rect) {
+    }
 
-  setTextColor(color) {
-  }
+    setFont(font) {
+    }
 
-  setTextAlignedLeft() {
-  }
+    setTextColor(color) {
+    }
 
-  setTextAlignedCenter() {
-  }
+    setTextAlignedLeft() {
+    }
 
-  setTextAlignedRight() {
-  }
+    setTextAlignedCenter() {
+    }
+
+    setTextAlignedRight() {
+    }
 }
 
 module.exports = DrawContext;

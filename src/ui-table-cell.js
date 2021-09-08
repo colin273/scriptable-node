@@ -1,3 +1,4 @@
+const { UITable } = require('../index.js');
 const Request = require('./request.js');
 
 class UITableCell {
@@ -43,7 +44,7 @@ module.exports = {
   },
 
   imageAtURL: function(url) {
-    return this.image(await new Request(url).loadImage());
+    //return this.image(await new Request(url).loadImage());
   },
 
   text: function(title, subtitle) {
@@ -52,3 +53,5 @@ module.exports = {
     t._subtitle = subtitle;
   }
 }
+
+module.exports = UITableCell

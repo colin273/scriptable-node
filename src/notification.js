@@ -1,4 +1,6 @@
 class Notification {
+  #actions;
+
   constructor() {
     this.identifier = require('uuid').v4();
     this.title = "";
@@ -10,7 +12,11 @@ class Notification {
     this.userInfo = {};
     this.sound = null;
     this.openURL = null;
-    this.actions = []; // This should be read-only except when addAction appends an item
+    this.#actions = [];
+  }
+
+  get actions() {
+    return this.#actions;
   }
 
   async schedule() {

@@ -1,108 +1,111 @@
-exports.Alert = require('./src/alert.js');
+"use strict";
 
-exports.Calendar = require('./src/calendar.js');
+// As APIs are completed, they will be uncommented.
 
-exports.CalendarEvent = require('./src/calendar-event.js');
+exports.Alert = require("./src/alert.js");
 
-exports.CallbackURL = require('./src/callback-url.js');
+// Undocumented App class, available in Scriptable
+exports.App = require("./src/app.js");
 
-exports.Color = require('./src/color.js');
+//exports.Calendar = require("./src/calendar.js");
 
-exports.Contact = require('./src/contact.js');
+//exports.CalendarEvent = require("./src/calendar-event.js");
 
-exports.ContactsContainer = require('./src/contacts-container.js');
+exports.CallbackURL = require("./src/callback-url.js");
 
-exports.ContactsGroup = require('./src/contacts-group.js');
+exports.Color = require("./src/color.js");
 
-exports.Data = require('./src/data.js');
+//exports.Contact = require("./src/contact.js");
 
-exports.DateFormatter = require('./src/date-formatter.js');
+//exports.ContactsContainer = require("./src/contacts-container.js");
 
-exports.DatePicker = require('./src/date-picker.js');
+//exports.ContactsGroup = require("./src/contacts-group.js");
 
-exports.Device = require('./src/device.js');
+exports.Data = require("./src/data.js");
 
-exports.Dictation = require('./src/dictation.js');
+exports.DateFormatter = require("./src/date-formatter.js");
 
-exports.DocumentPicker = require('./src/document-picker.js');
+exports.DatePicker = require("./src/date-picker.js");
 
-exports.DrawContext = require('./src/draw-context.js');
+exports.Device = require("./src/device.js");
 
-exports.FileManager = require('./src/file-manager.js');
+//exports.Dictation = require("./src/dictation.js");
 
-exports.Font = require('./src/font.js');
+exports.DocumentPicker = require("./src/document-picker.js");
 
-exports.Image = require('./src/image.js');
+exports.DrawContext = require("./src/draw-context.js");
 
-exports.importModule = require;
+exports.FileManager = require("./src/file-manager.js");
 
-exports.Keychain = require('./src/keychain.js');
+exports.Font = require("./src/font.js");
 
-exports.LinearGradient = require('./src/linear-gradient.js');
+exports.Image = require("./src/image.js");
 
-exports.ListWidget = require('./src/list-widget.js');
+exports.importModule = require("./src/import-module.js");
 
-exports.Location = require('./src/location.js');
+exports.Keychain = require("./src/keychain.js");
 
-exports.Mail = require('./src/mail.js');
+exports.LinearGradient = require("./src/linear-gradient.js");
 
-exports.Message = require('./src/message.js');
+exports.ListWidget = require("./src/list-widget.js");
 
-exports.Notification = require('./src/notification.js');
+exports.Location = require("./src/location.js");
 
-exports.Pasteboard = require('./src/pasteboard.js');
+exports.Mail = require("./src/mail.js");
 
-exports.Path = require('./src/path.js');
+exports.Message = require("./src/message.js");
 
-exports.Photos = require('./src/photos.js');
+exports.Notification = require("./src/notification.js");
 
-exports.Point = require('./src/point.js');
+exports.Pasteboard = require("./src/pasteboard.js");
 
-exports.QuickLook = require('./src/quick-look.js');
+exports.Path = require("./src/path.js");
 
-exports.Rect = require('./src/rect.js');
+exports.Photos = require("./src/photos.js");
 
-exports.RecurrenceRule = require('./src/recurrence-rule.js');
+exports.Point = require("./src/point.js");
 
-exports.RelativeDateTimeFormatter = require('./src/relative-date-time-formatter.js');
+exports.QuickLook = require("./src/quick-look.js");
 
-exports.Reminder = require('./src/reminder.js');
+exports.Rect = require("./src/rect.js");
 
-exports.Request = require('./src/request.js');
+exports.RecurrenceRule = require("./src/recurrence-rule.js");
 
-exports.Safari = require('./src/safari.js');
+exports.RelativeDateTimeFormatter = require("./src/relative-date-time-formatter.js");
 
-exports.Script = require('./src/script.js');
+//exports.Reminder = require("./src/reminder.js");
 
-exports.SFSymbol = require('./src/sf-symbol.js');
+exports.Request = require("./src/request.js");
 
-exports.ShareSheet = require('./src/share-sheet.js');
+exports.Safari = require("./src/safari.js");
 
-exports.Size = require('./src/size.js');
+exports.Script = require("./src/script.js");
 
-exports.Speech = {
-  speak: function (text) {
-    require('say').speak(text);
-  }
-}
+exports.SFSymbol = require("./src/sf-symbol.js");
 
-exports.Timer = require('./src/timer.js');
+exports.ShareSheet = require("./src/share-sheet.js");
 
-exports.UITable = require('./src/ui-table.js');
+exports.Size = require("./src/size.js");
 
-exports.UITableCell = require('./src/ui-table-cell.js');
+exports.Speech = require("./src/speech.js");
 
-exports.UITableRow = require('./src/ui-table-row.js');
+exports.TextField = require("./src/text-field.js");
 
-exports.URLScheme = require('./src/url-scheme.js');
+exports.Timer = require("./src/timer.js");
 
-exports.UUID = {
-  string: require('uuid').v4
-}
+exports.UITable = require("./src/ui-table.js");
 
-exports.WebView = require('./src/web-view.js');
+exports.UITableCell = require("./src/ui-table-cell.js");
 
-exports.XMLParser = require('./src/xml-parser.js');
+exports.UITableRow = require("./src/ui-table-row.js");
+
+exports.URLScheme = require("./src/url-scheme.js");
+
+exports.UUID = require("./src/uuid.js");
+
+exports.WebView = require("./src/web-view.js");
+
+exports.XMLParser = require("./src/xml-parser.js");
 
 /*
 Global functions for the console
@@ -115,17 +118,12 @@ exports.log = exports._scriptable_log = console.log;
 exports.logError = exports._scriptable_logError = console.error;
 exports.logWarning = exports._scriptable_logWarning = console.warn;
 
-// A few undocumented items
-exports.App = {
-  close: function () {} // Does nothing for now; maybe later?
-}
-
 // Create and log deprecation messages
 exports._scriptable_deprecation = function (itemName, version, message) {
-  console.warn(`${itemName} was deprecated in version ${version}. ${message}`)
-}
+    console.warn(`${itemName} was deprecated in version ${version}. ${message}`);
+};
 
 // Convert everything to a string, like Scriptable does for its console
-exports._scriptable_createLogMessage = function (obj) {
-  return (typeof obj === "object") ? JSON.stringify(obj) : String(obj)
-}
+// This differs slightly from Scriptable's implmentation, since it actually stringifies
+// null and String objects rather than simply returning them.
+exports._scriptable_createLogMessage = require("./util/create-log-message.js");
