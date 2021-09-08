@@ -56,7 +56,7 @@ class XMLParser {
     parse() {
         try {
             this.#parser.write(this.string).close();
-            if (this.didStartDocument) {
+            if (typeof this.didStartDocument === "function") {
                 this.didStartDocument();
             }
             return true;
