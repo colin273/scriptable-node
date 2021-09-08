@@ -80,6 +80,7 @@ After that, the process of developing system-specific bridges begins.
 
 APIs with a check mark next to their names are "finished." This does not mean that they are ready to use, as they may rely on unfinished APIs. Rather, it just means that no more code should be needed to get them working, and any further work on them is just debugging (or, at some point in the future, possibly adding new features).
 
+- [x] App
 - [ ] Alert
 - [ ] args
 - [ ] Calendar
@@ -143,5 +144,5 @@ APIs with a check mark next to their names are "finished." This does not mean th
 
 ## Things to do once this sort of works
 
-[ ] Integrate the actual system keychain on macOS
-[ ] Share sheet--somehow?
+- [ ] Integrate the actual system keychain on macOS
+- [ ] Share sheet--somehow?

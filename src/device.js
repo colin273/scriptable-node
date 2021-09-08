@@ -18,22 +18,25 @@ function getDirect() {
     });
 }
 
-function applescriptSystemInfo() {
-    return JSON.parse(execFileSync("osascript", [
+function runJXA(script, standardAdditions) {
+    if (standardAdditions) {
+        script = `app = Application.currentApplication();
+        app.includeStandardAdditions = true;
+        ` + script;
+    }
+    return execFileSync("osascript", [
         "-l",
         "JavaScript",
         "-e",
-        `app = Application.currentApplication();
-        app.includesStandardAdditions = true;
-        JSON.stringify(app.systemInfo())`
+        script
     ], {
         encoding: "utf-8"
-    }));
+    });
 }
 
-function systemInStore() {
-    if (!("osInfo" in infoStore)) {
-        infoStore.osInfo = getDirect("cjs", "systeminformation", "osInfo");
+function systemInStore(key) {
+    if (!(key in infoStore)) {
+        infoStore.osInfo = getDirect("cjs", "systeminformation", key);
     }
 }
 
@@ -41,12 +44,12 @@ module.exports = {
     name: computerName,
 
     systemName: function () {
-        systemInStore();
+        systemInStore("osInfo");
         return infoStore.osInfo.distro;
     },
 
     systemVersion: function () {
-        systemInStore();
+        systemInStore("osInfo");
         return infoStore.osInfo.release;
     },
 
@@ -54,7 +57,7 @@ module.exports = {
     },
 
     isPhone: function () {
-        systemInStore();
+        systemInStore("osInfo");
         return infoStore.osInfo.distro === "iOS";
     },
 
@@ -68,6 +71,9 @@ module.exports = {
     },
 
     screenResolution: function () {
+        systemInStore("displays");
+        const displayData = infoStore.displays[0];
+        return new Size(displayData.resolutionX, displayData.resolutionY);
     },
 
     screenScale: function () {
@@ -153,6 +159,9 @@ module.exports = {
     },
 
     volume: function () {
+        if (process.platform === "darwin") {
+            return JSON.parse(runJXA("JSON.stringify(app.getVolumeSettings);", true)).outputVolume / 100
+        }
         return Number(getDirect("cjs", "loudness", "getVolume")) / 100;
     },
 
