@@ -18,7 +18,7 @@ class Color {
         const rgb = hexRgb(hex);
 
         Object.defineProperty(this, "hex", {
-            value: intToHex(rgb.red) + intToHex(rgb.green) + intTohex(rgb.blue),
+            value: intToHex(rgb.red) + intToHex(rgb.green) + intToHex(rgb.blue),
             writable: false,
             enumerable: true
         });

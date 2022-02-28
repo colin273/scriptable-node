@@ -10,6 +10,11 @@ async function shellPresent(alertType) {
 }
 
 class Action {
+    /**
+     * 
+     * @param {string} title 
+     * @param {*} type 
+     */
     constructor(title, type) {
         this.title = title;
         this.type = type;
