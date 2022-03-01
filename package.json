@@ -7,20 +7,23 @@
     "lib": "lib"
   },
   "dependencies": {
-    "brightness": "^2.2.0",
+    "brightness": "^3.0.0",
     "canvas": "^2.6.1",
     "clipboardy": "^2.3.0",
     "computer-name": "^0.1.0",
-    "date-fns": "^2.16.1",
+    "file-uti": "^1.0.0",
     "hex-rgb": "^4.3.0",
     "image-size": "^0.9.3",
     "loudness": "^0.4.1",
+    "luxon": "^2.0.2",
+    "macos-open-file-dialog": "^1.0.1",
     "node-fetch": "^2.6.1",
     "open": "^7.3.0",
     "os-locale": "^6.0.0",
     "sax": "^1.2.4",
     "say": "^0.16.0",
     "systeminformation": "^5.8.7",
+    "uti": "^6.3.12",
     "uuid": "^8.3.2"
   },
   "scripts": {

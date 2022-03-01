@@ -8,12 +8,6 @@ function intToHex(int) {
 }
 
 class Color {
-    #hex;
-    #red;
-    #green;
-    #blue;
-    #alpha;
-
     constructor(hex, alpha) {
         const rgb = hexRgb(hex);
 
@@ -109,7 +103,7 @@ class Color {
     }
 
     static dynamic(lightColor, darkColor) {
-        return (require('./device.js').isUsingDarkAppearance()) ? darkColor : lightColor;
+        return (require("./device.js").isUsingDarkAppearance()) ? darkColor : lightColor;
     }
 }
 

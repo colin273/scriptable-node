@@ -28,7 +28,7 @@ class Path {
   }
 
   addRects(rects) {
-    for(rect of rects) {
+    for (const rect of rects) {
       this.addRect(rect);
     }
   }

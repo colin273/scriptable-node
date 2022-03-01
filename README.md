@@ -118,7 +118,7 @@ APIs with a check mark next to their names are "finished." This does not mean th
 - [ ] QuickLook
 - [x] Rect
 - [ ] RecurrenceRule
-- [ ] RelativeDateTimeFormatter
+- [x] RelativeDateTimeFormatter
 - [ ] Reminder
 - [ ] Request
 - [x] Safari

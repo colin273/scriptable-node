@@ -1,5 +1,5 @@
-const { createCanvas } = require('canvas');
-const Size = require('./size');
+const { createCanvas } = require("canvas");
+const Size = require("./size");
 
 class DrawContext {
     #canvas;
@@ -10,7 +10,7 @@ class DrawContext {
         this.respectScreenScale = false;
         this.opaque = true;
         this.#canvas = createCanvas();
-        this.#ctx = this.#canvas.getContext('2d');
+        this.#ctx = this.#canvas.getContext("2d");
     }
 
     getImage() {
