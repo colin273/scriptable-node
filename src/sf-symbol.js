@@ -1,6 +1,9 @@
 const Font = require('./font.js');
 
 class SFSymbol {
+  /**
+   * @param {string} name
+   */
   constructor(name) {
     Object.defineProperties(this, {
       _name: {
@@ -21,7 +24,9 @@ class SFSymbol {
   get image() {
     // Convert SFSymbol (a character in a font) to PNG
   }
-
+  /**
+   * @param {Font} font
+   */
   applyFont(font) {
     this._font = font;
   }
@@ -62,7 +67,9 @@ class SFSymbol {
     this._weight = "black";
   }
 }
-
+/**
+ * @param {string} symbolName
+ */
 exports.named = function(symbolName) {
   return new SFSymbol(symbolName);
 }
