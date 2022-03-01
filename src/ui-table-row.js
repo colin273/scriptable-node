@@ -1,6 +1,7 @@
 const UITableCell = require('./ui-table-cell.js');
 
 class UITableRow {
+  #cells;
   constructor() {
     this.backgroundColor = null;
     this.cellSpacing = 2;
@@ -8,16 +9,12 @@ class UITableRow {
     this.height = 44;
     this.isHeader = false;
     this.onSelect = null;
-    Object.defineProperty(this, "_cells", {
-      value: [],
-      enumerable: false,
-      writable: true
-    });
+    this.#cells = [];
   }
 
   addButton(title) {
     const b = UITableCell.button(title);
-    this._cells.push(b);
+    this.#cells.push(b);
     return b;
   }
 
@@ -27,19 +24,19 @@ class UITableRow {
 
   addImage(image) {
     const i = UITableCell.image(image);
-    this._cells.push(i);
+    this.#cells.push(i);
     return i;
   }
 
   addImageAtURL(url) {
     const i = UITableCell.imageAtURL(url);
-    this._cells.push(i);
+    this.#cells.push(i);
     return i;
   }
 
   addText(title, subtitle) {
     const t = UITableCell.text(title, subtitle);
-    this._cells.push(t);
+    this.#cells.push(t);
     return t;
   }
 }

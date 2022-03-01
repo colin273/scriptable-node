@@ -1,49 +1,51 @@
-// This exists because APIs such as Device are entirely synchronous
-// in Scriptable, but the libraries to get the same data in Node.JS
-// tend to use asynchronous functions or are ESM-only.
-//
-// Scriptable mimics the CommonJS module format, so that is what I have used.
-// Therefore, ESM modules cannot be used directly in this project.
-//
-// This is a wrapper for those modules that are otherwise incompatible,
-// intended to be used with child_process.execFileSync.
-
-// Command line usage:
-//   node <this file's name> <module type - cjs or esm> <module name to call> <name of method to run>
-// CLI Example:
-//   node async-syncifier.js cjs systeminformation osInfo
-//
-// JS usage:
-//   child_process.execFileSync("node", [
-//      <this file's name>,
-//      <module type - cjs or esm>,
-//      <name of module to require>,
-//      <name of method to run>
-//   ])
-// JS example:
-//   child_process.execFileSync("node", [
-//     "async-syncifier.js",
-//     "cjs",
-//     "systeminformation",
-//     "osInfo"
-//   ])
-
 "use strict";
 
-const createLogMessage = require("./create-log-message.js");
-const moduleName = process.argv[3];
+const { execFileSync } = require("child_process");
 
-let functionToRun;
+const execString = script => {
+    return execFileSync("node", ["-e", script], { encoding: "utf-8" });
+};
 
-(async () => {
-    switch(process.argv[2]) {
+class WrapperScript {
+    constructor(starter = "") {
+        if (typeof starter === "string") {
+            this.script = starter;
+        } else if (starter instanceof String) {
+            this.script = starter.toString();
+        } else {
+            this.script = "";
+        }
+    }
+
+    addLine(str) {
+        this.script += str + "\n";
+    }
+
+    asyncWrap() {
+        const asyncFunc = (async ()=>{}).constructor(this.script).toString();
+        this.script = "(" + asyncFunc + ")();"
+    }
+}
+
+const getDirect = (type, moduleName, fnName) => {
+    const wrapperScript = new WrapperScript("\"use strict\"\n;");
+    wrapperScript.addLine(`const scriptData = ${JSON.stringify({ moduleName, fnName })};`);
+    wrapperScript.addLine(`const createLogMessage = ${require("./create-log-message.js").toString()};`);
+    let importStatement;
+    switch (type) {
         case "esm":
-            functionToRun = await import(moduleName);
+            importStatement = "await import";
             break;
         case "cjs":
         default:
-            functionToRun = require(moduleName);
+            importStatement = "require";
     }
-    for (const key of process.argv.slice(4)) functionToRun = functionToRun[key];
-    process.stdout.write(createLogMessage(await functionToRun()));
-})();
+    wrapperScript.addLine(`const moduleToRun = ${importStatement}(scriptData.moduleName);`);
+    wrapperScript.addLine("const functionToRun = moduleToRun[scriptData.fnName];");
+    wrapperScript.addLine("const executedFunction = await functionToRun();");
+    wrapperScript.addLine("process.stdout.write(createLogMessage(executedFunction));");
+    wrapperScript.asyncWrap();
+    return execString(wrapperScript.script);
+}
+
+module.exports = { execString, WrapperScript, getDirect };

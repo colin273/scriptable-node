@@ -2,24 +2,16 @@
 
 const { writeSync, readSync } = require("clipboardy");
 
+const copyString = (string) => writeSync(string);
+const pasteString = () => readSync();
+const copyImage = (image) => {}; // To-do
+const pasteImage = () => {}; // To-do
+
 module.exports = {
-    copy: function () {
-        this.copyString(string);
-    },
-
-    paste: function () {
-        return this.pasteString();
-    },
-
-    copyString: function () {
-        writeSync(string);
-    },
-
-    pasteString: function () {
-        return readSync();
-    },
-
-    copyImage: function () {},
-
-    pasteImage: function () {}
+  copy: copyString,
+  copyImage,
+  copyString,
+  paste: pasteString,
+  pasteImage,
+  pasteString
 };

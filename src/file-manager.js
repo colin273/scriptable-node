@@ -23,11 +23,15 @@ To do:
 
 */
 
-const Data = require('./data.js');
-const fs = require('fs');
-const Image = require('./image.js');
-const os = require('os');
-const path = require('path');
+const Data = require("./data.js");
+const fs = require("fs");
+const Image = require("./image.js");
+const os = require("os");
+const path = require("path");
+const dataKey = Symbol.for("data");
+
+// Yes, yes, I know, don't use JSON as a database
+const BOOKMARKS_PATH = "../config/file-bookmarks.json";
 
 class FileManager {
     #type;
@@ -46,7 +50,7 @@ class FileManager {
     }
 
     readString(filePath) {
-        return fs.readFileSync(filePath, {encoding: 'utf8'});
+        return fs.readFileSync(filePath, { encoding: "utf-8" });
     }
 
     readImage(filePath) {
@@ -54,7 +58,7 @@ class FileManager {
     }
 
     write(filePath, content) {
-        fs.writeFileSync(filePath, content._data);
+        fs.writeFileSync(filePath, content[dataKey]);
     }
 
     writeString(filePath, content) {
@@ -62,7 +66,7 @@ class FileManager {
     }
 
     writeImage(filePath, image) {
-        fs.writeFileSync(filePath, image._data);
+        fs.writeFileSync(filePath, image[dataKey]);
     }
 
     remove(filePath) {
@@ -86,12 +90,12 @@ class FileManager {
     }
 
     createDirectory(path, intermediateDirectories) {
-        fs.mkdirSync(path, {recursive: intermediateDirectories});
+        fs.mkdirSync(path, { recursive: intermediateDirectories });
     }
 
     temporaryDirectory() {
         if (this.#type == 'iCloud') {
-            console.error('Temporary directory cannot be accessed in iCloud. Use a local FileManager instead.');
+            throw new Error('Temporary directory cannot be accessed in iCloud. Use a local FileManager instead.');
         } else {
             return os.tmpdir();
         }
@@ -137,6 +141,12 @@ class FileManager {
     }
 
     getUTI(filePath) {
+        // file-uti is for macOS only
+        if (process.platform === "darwin") {
+            return require("file-uti").sync(filePath);
+        }
+
+        // For other platforms
     }
 
     listContents(directoryPath) {
@@ -156,9 +166,15 @@ class FileManager {
     }
 
     bookmarkedPath(name) {
+        try {
+            return this.allFileBookmarks().find(b => b.name === name)._path;
+        } catch {
+            throw new Error(`No bookmark named "${name}" found.`);
+        }
     }
 
     bookmarkExists(name) {
+        return Boolean(this.allFileBookmarks().find(b => b.name === name));
     }
 
     async downloadFileFromiCloud(filePath) {
@@ -183,15 +199,20 @@ class FileManager {
     }
 
     allFileBookmarks() {
+        try {
+            return JSON.parse(fs.readFileSync(BOOKMARKS_PATH, { encoding: "utf-8" }));
+        } catch {
+            return {};
+        }
     }
 }
 
 module.exports = {
-  local: function() {
-    return new FileManager('local');
-  },
+    local: function() {
+        return new FileManager('local');
+    },
 
-  iCloud: function() {
-    return new FileManager('iCloud');
-  }
+    iCloud: function() {
+        return new FileManager('iCloud');
+    }
 }
