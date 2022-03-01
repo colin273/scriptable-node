@@ -73,3 +73,6 @@ class SFSymbol {
 exports.named = function(symbolName) {
   return new SFSymbol(symbolName);
 }
+
+// Uncomment this once class is complete
+// module.exports = SFSymbol;
