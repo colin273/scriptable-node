@@ -25,7 +25,7 @@ class Alert {
     #actions;
     #fields;
     #values;
-
+    
     constructor() {
         this.title = null;
         this.message = null;
@@ -34,30 +34,50 @@ class Alert {
         this.#values = [];
     }
 
+    /**
+     * @param {string} title
+     */
     addAction(title) {
         this.#actions.push(new Action(title, "action"));
     }
 
+    /**
+     * @param {string} title
+     */
     addDestructiveAction(title) {
         this.#actions.push(new Action(title, "destructive"));
     }
 
+    /**
+     * @param {string} title
+     */
     addCancelAction(title) {
         this.#actions.push(new Action(title, "cancel"));;
     }
 
+    /**
+     * @param {string} text
+     * @param {string} placeholder
+     */
     addTextField(placeholder, text) {
         const field = new TextField(placeholder, text, false);
         this.#fields.push(field);
         return field;
     }
 
+    /**
+     * @param {string} text
+     * @param {string} placeholder
+     */
     addSecureTextField(placeholder, text) {
         const field = new TextField(placeholder, text, true);
         this.#fields.push(field);
         return field;
     }
 
+    /**
+     * @param {number} index
+     */
     textFieldValue(index) {
         return this.#values[index];
     }
