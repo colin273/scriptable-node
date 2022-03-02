@@ -18,6 +18,9 @@ class SFSymbol {
   #name;
   #weight;
   #font;
+  /**
+   * @param {string} name
+   */
   constructor(name) {
     this.#name = name;
     this.#weight = weights.REGULAR;
@@ -27,7 +30,9 @@ class SFSymbol {
   get image() {
     // Convert SFSymbol (a character in a font) to PNG
   }
-
+  /**
+   * @param {Font} font
+   */
   applyFont(font) {
     this.#font = font;
   }
@@ -68,7 +73,12 @@ class SFSymbol {
     this.#weight = weights.BLACK;
   }
 }
+/**
+ * @param {string} symbolName
+ */
+exports.named = function(symbolName) {
+  return new SFSymbol(symbolName);
+}
 
-module.exports = {
-  named: (symbolName) => new SFSymbol(symbolName)
-};
+// Uncomment this once class is complete
+// module.exports = SFSymbol;
