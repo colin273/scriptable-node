@@ -2,6 +2,9 @@
 
 const hexRgb = require("hex-rgb");
 
+/**
+ * @param {number} int
+ */
 function intToHex(int) {
     const hexString = int.toString(16).toUpperCase();
     return (hexString.length === 1) ? hexString.repeat(2) : hexString;
