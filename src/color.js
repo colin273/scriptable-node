@@ -14,6 +14,12 @@ class Color {
     #blue;
     #alpha;
 
+    /**
+     * @readonly
+     * @param {string} hex
+     * @param {number} alpha
+     */
+
     constructor(hex, alpha) {
         const rgb = hexRgb(hex);
 
@@ -108,6 +114,10 @@ class Color {
         return new this("000000", 0);
     }
 
+    /**
+     * @param {Color} lightColor
+     * @param {Color} darkColor
+     */
     static dynamic(lightColor, darkColor) {
         return (require('./device.js').isUsingDarkAppearance()) ? darkColor : lightColor;
     }
