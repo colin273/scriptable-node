@@ -165,6 +165,9 @@ module.exports = {
         return Number(getDirect("cjs", "loudness", "getVolume")) / 100;
     },
 
+    /**
+     * @param {number} percentage
+     */
     setScreenBrightness: function (percentage) {
         try {
             brightness.set(percentage);
