@@ -5,7 +5,7 @@
 
 const KEYCHAIN_PATH = "../config/keychain.json";
 
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require("fs");
 
 function readKeychain() {
     try {

@@ -1,8 +1,10 @@
+const { v4: uuidv4 } = require("uuid");
+
 class Notification {
   #actions;
 
   constructor() {
-    this.identifier = require('uuid').v4();
+    this.identifier = uuidv4();
     this.title = "";
     this.subtitle = "";
     this.body = "";

@@ -122,7 +122,7 @@ class Color {
      * @param {Color} darkColor
      */
     static dynamic(lightColor, darkColor) {
-        return (require('./device.js').isUsingDarkAppearance()) ? darkColor : lightColor;
+        return (require("./device.js").isUsingDarkAppearance()) ? darkColor : lightColor;
     }
 }
 

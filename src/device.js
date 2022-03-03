@@ -1,68 +1,53 @@
+// Still unfinished:
+// - screenSize
+// - screenScale
+// - preferredLanguages
+
 "use strict";
 
-const { execFileSync } = require("child_process");
-const computerName = require("computer-name");
 const brightness = require("brightness");
-const { join } = require("path");
-
+const computerName = require("computer-name");
+const { execFileSync } = require("child_process");
+const { execString, getDirect } = require("../util/async-syncifier.js");
+const runJXA = require("../util/run-jxa.js");
 const Size = require("./size.js");
+const scriptableTypeError = require("../util/type-error.js");
+
+const IPHONE_MODEL = /iPhone\d+,\d+/;
+const IPAD_MODEL = /iPad\d+,\d+/;
 
 const infoStore = {};
 
-function getDirect() {
-    return execFileSync("node", [
-        join(__dirname, "..", "util/device-syncifier.js"),
-        ...Array.from(arguments)
-    ], {
-        encoding: "utf-8"
-    });
-}
-
-function runJXA(script, standardAdditions) {
-    if (standardAdditions) {
-        script = `app = Application.currentApplication();
-        app.includeStandardAdditions = true;
-        ` + script;
-    }
-    return execFileSync("osascript", [
-        "-l",
-        "JavaScript",
-        "-e",
-        script
-    ], {
-        encoding: "utf-8"
-    });
-}
-
-function systemInStore(key) {
+const systemInStore = key => {
     if (!(key in infoStore)) {
-        infoStore.osInfo = getDirect("cjs", "systeminformation", key);
+        infoStore[key] = JSON.parse(getDirect("cjs", "systeminformation", key));
     }
-}
+    return infoStore[key];
+};
 
 module.exports = {
     name: computerName,
 
     systemName: function () {
-        systemInStore("osInfo");
-        return infoStore.osInfo.distro;
+        return systemInStore("osInfo").distro;
     },
 
     systemVersion: function () {
-        systemInStore("osInfo");
-        return infoStore.osInfo.release;
+        return systemInStore("osInfo").release;
     },
 
     model: function () {
+        // Not a perfect replacement (normally returns  "iPhone" or "iPad"),
+        // but it'll do for now
+        return systemInStore("chassis").model;
     },
 
     isPhone: function () {
-        systemInStore("osInfo");
-        return infoStore.osInfo.distro === "iOS";
+        return this.model().match(IPHONE_MODEL) !== null;
     },
 
     isPad: function () {
-        return !this.isPhone();
+        return this.model().match(IPAD_MODEL) !== null;
     },
 
     screenSize: function () {
@@ -71,8 +56,7 @@ module.exports = {
     },
 
     screenResolution: function () {
-        systemInStore("displays");
-        const displayData = infoStore.displays[0];
+        const displayData = systemInStore("graphics").displays[0];
         return new Size(displayData.resolutionX, displayData.resolutionY);
     },
 
@@ -80,7 +64,13 @@ module.exports = {
     },
 
     screenBrightness: function () {
-        return getDirect("cjs", "brightness", "get");
+        try {
+            return Number(execString(`require("brightness").get().then(level => {
+                process.stdout.write(level.toString())
+            })`));
+        } catch {
+            return 1;
+        }
     },
 
     isInPortrait: function () {
@@ -89,16 +79,17 @@ module.exports = {
     },
 
     isInPortraitUpsideDown: function () {
-        // No way to check for this so far
+        // No way to detect upside down for portrait
         return false;
     },
 
     isInLandscapeLeft: function () {
-        // If in landscape, assume landscape left for now
-        return !this.isInPortrait();
+        // No way to detect right or left for landscape
+        return false;
     },
 
     isInLandscapeRight: function () {
+        // No way to detect right or left for landscape
         return false;
     },
 
@@ -144,23 +135,29 @@ module.exports = {
             infoStore.locale = getDirect("esm", "os-locale", "osLocale")
                 .replace("-", "_");
         }
-
         return infoStore.locale;
     },
 
     language: function () {
-        // For now, assume English
-        return "en";
+        return this.locale().slice(0, 2);
     },
 
     isUsingDarkAppearance: function () {
-        // For now, assume false
+        if (process.platform === "darwin") {
+            return execFileSync("osascript", [
+                "-e",
+                "tell app \"System Events\" to tell appearance preferences to get dark mode"
+            ], { encoding: "utf-8" }).trim() === "true";
+        }
+        // For now, assume false on non-macOS platforms
         return false;
     },
 
     volume: function () {
         if (process.platform === "darwin") {
-            return JSON.parse(runJXA("JSON.stringify(app.getVolumeSettings);", true)).outputVolume / 100
+            const volumeSettings = JSON.parse(runJXA("JSON.stringify(app.getVolumeSettings())", true))
+            if (volumeSettings.outputMuted) return 0;
+            return volumeSettings.outputVolume / 100;
         }
         return Number(getDirect("cjs", "loudness", "getVolume")) / 100;
     },
@@ -169,6 +166,9 @@ module.exports = {
      * @param {number} percentage
      */
     setScreenBrightness: function (percentage) {
+        if (typeof percentage !== "number") {
+            throw scriptableTypeError("number", typeof percentage)
+        }
         try {
             brightness.set(percentage);
         } catch {}

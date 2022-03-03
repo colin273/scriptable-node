@@ -7,18 +7,15 @@
 "use strict";
 
 const Script = require("./script.js");
+const URL_PREFIX = "scriptable:///";
 const encodedName = encodeURIComponent(require("path").basename(Script.name()));
 
+const forOpeningScript = () => `${URL_PREFIX}open/${encodedName}`;
+const forOpeningScriptSettings = () => forOpeningScript() + "?openSettings=true";
+const forRunningScript = () => `${URL_PREFIX}run/${encodedName}`;
+
 module.exports = {
-    forOpeningScript: function () {
-        return `scriptable:///open/${encodedName}`;
-    },
-
-    forOpeningScriptSettings: function () {
-        return `scriptable:///open/${encodedName}?openSettings=true`;
-    },
-
-    forRunningScript: function () {
-        return `scriptable:///run/${encodedName}`;
-    }
+  forOpeningScript,
+  forOpeningScriptSettings,
+  forRunningScript
 };

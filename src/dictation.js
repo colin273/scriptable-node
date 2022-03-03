@@ -1,6 +1,6 @@
 "use strict";
 
-const defaultLocale = require('./device.js').locale();
+const defaultLocale = require("./device.js").locale();
 
 exports.start = async function (locale = defaultLocale) {
     // Dictate text, return transcription

@@ -1,24 +1,30 @@
-const Font = require('./font.js');
+const Font = require("./font.js");
+
+const weights = {
+  ULTRA_LIGHT: "ultralight",
+  THIN: "thin",
+  LIGHT: "light",
+  REGULAR: "regular",
+  MEDIUM: "medium",
+  SEMI_BOLD: "semibold",
+  BOLD: "bold",
+  HEAVY: "heavy",
+  BLACK: "black"
+};
+
+Object.freeze(weights);
 
 class SFSymbol {
+  #name;
+  #weight;
+  #font;
   /**
    * @param {string} name
    */
   constructor(name) {
-    Object.defineProperties(this, {
-      _name: {
-        value: name,
-        writable: true
-      },
-      _weight: {
-        value: "regular",
-        writable: true
-      },
-      _font: {
-        value: Font.body(),
-        writable: true
-      }
-    })
+    this.#name = name;
+    this.#weight = weights.REGULAR;
+    this.#font = Font.body();
   }
 
   get image() {
@@ -28,43 +34,43 @@ class SFSymbol {
    * @param {Font} font
    */
   applyFont(font) {
-    this._font = font;
+    this.#font = font;
   }
 
   applyUltraLightWeight() {
-    this._weight = "ultraLight";
+    this.#weight = weights.ULTRA_LIGHT;
   }
 
   applyThinWeight() {
-    this._weight = "thin";
+    this.#weight = weights.THIN;
   }
 
   applyLightWeight() {
-    this._weight = "light";
+    this.#weight = weights.LIGHT;
   }
 
   applyRegularWeight() {
-    this._weight = "regular";
+    this.#weight = weights.REGULAR;
   }
 
   applyMediumWeight() {
-    this._weight = "medium";
+    this.#weight = weights.MEDIUM;
   }
 
   applySemiboldWeight() {
-    this._weight = "semibold";
+    this.#weight = weights.SEMI_BOLD;
   }
 
   applyBoldWeight() {
-    this._weight = "bold";
+    this.#weight = weights.BOLD;
   }
 
   applyHeavyWeight() {
-    this._weight = "heavy";
+    this.#weight = weights.HEAVY;
   }
 
   applyBlackWeight() {
-    this._weight = "black";
+    this.#weight = weights.BLACK;
   }
 }
 /**

@@ -1,134 +1,124 @@
-const Device = require('./device.js');
-const format = require('date-fns/format');
-const parse = require('date-fns/parse');
-
-const dateStyleKey = Symbol("dateStyle")
-const timeStyleKey = Symbol("timeStyle")
-
-function updateWithPredefined(formatter) {
-  if (formatter[dateStyleKey] != "" && formatter[timeStyleKey] != "") {
-    const separator = (formatter[dateStyleKey] == "M/d/yy") ? ", " : " 'at' ";
-    formatter.dateFormat = formatter[dateStyleKey] + separator + formatter[timeStyleKey];
-  } else {
-    formatter.dateFormat = formatter[dateStyleKey] + formatter[timeStyleKey];
-  }
-}
+const Device = require("./device.js");
+const format = require("date-fns/format");
+const parse = require("date-fns/parse");
 
 class DateFormatter {
-  constructor() {
-    this.dateFormat = "";
-    this.locale = Device.locale();
-  }
+    #dateStyle;
+    #timeStyle;
+    #customFormat;
+    #useCustomFormat;
+    #locale;
 
-  string(date) {
-    return format(date, this.dateFormat, {
-      locale: this.locale,
-      useAdditionalDayOfYearTokens: true,
-      useAdditionalWeekYearTokens: true
-    });
-  }
-
-  date(str) {
-    try {
-      return parse(date, this.dateFormat, {
-        locale: this.locale,
-        useAdditionalDayOfYearTokens: true,
-        useAdditionalWeekYearTokens: true
-      });
-    } catch {
-      return null;
+    constructor() {
+        this.dateFormat = "";
+        this.locale = Device.locale();
+        this.#dateStyle = null;
+        this.#timeStyle = null;
+        this.#useCustomFormat = true;
+        this.#locale = undefined;
     }
-  }
 
-  useNoDateStyle() {
-    Object.defineProperty(this, dateStyleKey, {
-      value: "",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    get dateFormat() {
+        if (this.#useCustomFormat) {
+            return this.#customFormat;
+        } else {
+            if (this.#dateStyle !== "" && this.#timeStyle !== "") {
+                const separator = (this.#dateStyle === "M/d/yy") ? ", " : " 'at' ";
+                return this.#dateStyle + separator + this.#timeStyle;
+            } else {
+                return this.#dateStyle + this.#timeStyle;
+            }
+        }
+    }
 
-  useShortDateStyle() {
-    Object.defineProperty(this, dateStyleKey, {
-      value: "M/d/yy",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    set dateFormat(str) {
+        this.#useCustomFormat = true;
+        this.#customFormat = str;
+    }
 
-  useMediumDateStyle() {
-    Object.defineProperty(this, dateStyleKey, {
-      value: "MMM d, y",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    set locale(localeString) {
+        this.#locale = localeString;
+    }
 
-  useLongDateStyle() {
-    Object.defineProperty(this, dateStyleKey, {
-      value: "MMMM d, y",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    #customFormatOff() {
+        this.#useCustomFormat = false;
+    }
 
-  useFullDateStyle() {
-    Object.defineProperty(this, dateStyleKey, {
-      value: "EEEE, MMMM d, y",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    string(date) {
+        if (this.#useCustomFormat) {
+            // return the custom formatted date
+        } else {
+            if (this.#dateStyle === null && this.#timeStyle === null) {
+                return "";
+            }
+            const formatOptions = {};
+            if (this.#dateStyle) formatOptions.dateStyle = this.#dateStyle;
+            if (this.#timeStyle) formatOptions.timeStyle = this.#timeStyle;
+            return (new Intl.DateTimeFormat(this.#locale, formatOptions)).format(date);
+        }
+    }
 
-  useNoTimeStyle() {
-    Object.defineProperty(this, timeStyleKey, {
-      value: "",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    date(str) {
+        try {
+            return parse(date, this.dateFormat, {
+                locale: this.locale,
+                useAdditionalDayOfYearTokens: true,
+                useAdditionalWeekYearTokens: true
+            });
+        } catch {
+            return null;
+        }
+    }
 
-  useShortTimeStyle() {
-    Object.defineProperty(this, timeStyleKey, {
-      value: "h:mm a",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    useNoDateStyle() {
+        this.#dateStyle = null;
+        this.#customFormatOff();
+    }
 
-  useMediumTimeStyle() {
-    Object.defineProperty(this, timeStyleKey, {
-      value: "h:mm:ss a",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    useShortDateStyle() {
+        this.#dateStyle = "short";
+        this.#customFormatOff();
+    }
 
-  useLongTimeStyle() {
-    Object.defineProperty(this, timeStyleKey, {
-      value: "h:mm:ss a z",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    useMediumDateStyle() {
+        this.#dateStyle = "medium";
+        this.#customFormatOff();
+    }
 
-  useFullTimeStyle() {
-    Object.defineProperty(this, timeStyleKey, {
-      value: "h:mm:ss a zzzz",
-      writable: true,
-      enumerable: false
-    });
-    updateWithPredefined(this);
-  }
+    useLongDateStyle() {
+        this.#dateStyle = "long";
+        this.#customFormatOff();
+    }
+
+    useFullDateStyle() {
+        this.#dateStyle = "full";
+        this.#customFormatOff();
+    }
+
+    useNoTimeStyle() {
+        this.#timeStyle = null;
+        this.#customFormatOff();
+    }
+
+    useShortTimeStyle() {
+        this.#timeStyle = "short";
+        this.#customFormatOff();
+    }
+
+    useMediumTimeStyle() {
+        this.#timeStyle = "medium";
+        this.#customFormatOff();
+    }
+
+    useLongTimeStyle() {
+        this.#timeStyle = "long";
+        this.#customFormatOff();
+    }
+
+    useFullTimeStyle() {
+        this.#timeStyle = "full";
+        this.#customFormatOff();
+    }
 }
 
 module.exports = DateFormatter;

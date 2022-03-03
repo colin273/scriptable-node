@@ -1,6 +1,7 @@
 "use strict";
 
-exports.present = async function (activityItems) {
+module.exports = {
+  present: async (activityItems) => {
     // Present share sheet for activityItems
     console.log("Share sheet is not supported yet");
     console.log("Share sheet items:")
@@ -10,7 +11,8 @@ exports.present = async function (activityItems) {
     // Example of when an action (in this case "Copy") is selected on iOS:
     // { "activity_type": "com.apple.UIKit.activity.CopyToPasteboard", "completed": true }
     return {
-        completed: false,
-        activity_type: null
+      completed: false,
+      activity_type: null
     };
+  }
 };
