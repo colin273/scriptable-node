@@ -162,6 +162,9 @@ module.exports = {
         return Number(getDirect("cjs", "loudness", "getVolume")) / 100;
     },
 
+    /**
+     * @param {number} percentage
+     */
     setScreenBrightness: function (percentage) {
         if (typeof percentage !== "number") {
             throw scriptableTypeError("number", typeof percentage)

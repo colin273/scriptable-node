@@ -3,6 +3,8 @@
 const fs = require("fs");
 const imageSize = require("image-size");
 const Size = require("./size.js");
+// Uncomment when finished
+// const Data = require("./data.js");
 
 const dataKey = Symbol.for("data");
 
@@ -25,6 +27,10 @@ class Image {
 }
 
 module.exports = {
+    /**
+     * @param {string} filePath
+     * @returns {Image} an Image or null
+     */
     fromFile: function (filePath) {
         try {
             return new Image(fs.readFileSync(filePath));
@@ -33,6 +39,9 @@ module.exports = {
         }
     },
 
+    /**
+     * @param {Data} data
+     */
     fromData: function (data) {
         try {
             return new Image(data[dataKey]);

@@ -2,12 +2,27 @@
 
 const hexRgb = require("hex-rgb");
 
+/**
+ * @param {number} int
+ */
 function intToHex(int) {
     const hexString = int.toString(16).toUpperCase();
     return (hexString.length === 1) ? hexString.repeat(2) : hexString;
 }
 
 class Color {
+    #hex;
+    #red;
+    #green;
+    #blue;
+    #alpha;
+
+    /**
+     * @readonly
+     * @param {string} hex
+     * @param {number} alpha
+     */
+
     constructor(hex, alpha) {
         const rgb = hexRgb(hex);
 
@@ -102,6 +117,10 @@ class Color {
         return new this("000000", 0);
     }
 
+    /**
+     * @param {Color} lightColor
+     * @param {Color} darkColor
+     */
     static dynamic(lightColor, darkColor) {
         return (require("./device.js").isUsingDarkAppearance()) ? darkColor : lightColor;
     }
