@@ -25,13 +25,21 @@ So far, these are the dependencies for this project:
 
 - `brightness`
 - `canvas`
+- `clipboardy`
 - `computer-name`
+- `file-uti`
 - `hex-rgb`
+- `image-size`
+- `loudness`
+- `luxon`
+- `macos-open-file-dialog`
 - `node-fetch`
 - `open`
+- `os-locale`
 - `sax`
 - `say`
 - `systeminformation`
+- `uti`
 - `uuid`
 
 These modules have a lot of their own dependencies that they will also install.
