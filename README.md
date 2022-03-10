@@ -23,24 +23,24 @@ Since this isn't on npm yet, you can only install this by downloading the repo d
 
 So far, these are the dependencies for this project:
 
-- `brightness`
-- `canvas`
-- `clipboardy`
-- `computer-name`
-- `file-uti`
-- `hex-rgb`
-- `image-size`
-- `loudness`
-- `luxon`
-- `macos-open-file-dialog`
-- `node-fetch`
-- `open`
-- `os-locale`
-- `sax`
-- `say`
-- `systeminformation`
-- `uti`
-- `uuid`
+- [Brightness](https://www.npmjs.com/package/brightness)`brightness`
+- [Canvas](https://www.npmjs.com/package/canvas)`canvas`
+- [Clipboardy](https://www.npmjs.com/package/clipboardy)`clipboardy`
+- [Computer-Name](https://www.npmjs.com/package/computer-name)`computer-name`
+- [File-Uti](https://www.npmjs.com/package/file-uti)`file-uti`
+- [Hex-rgb](https://www.npmjs.com/package/hex-rgb)`hex-rgb`
+- [Image-Size](https://www.npmjs.com/package/image-size)`image-size`
+- [Loudness](https://www.npmjs.com/package/loudness)`loudness`
+- [Luxon](https://www.npmjs.com/package/luxon)`luxon`
+- [Mac-open-file-dialog](https://www.npmjs.com/package/macos-open-file-dialog)`macos-open-file-dialog`
+- [Node-Fetch](https://www.npmjs.com/package/node-fetch)`node-fetch`
+- [Open](https://www.npmjs.com/package/open)`open`
+- [OS-Locale](https://www.npmjs.com/package/os-locale)`os-locale`
+- [Sax](https://www.npmjs.com/package/sax)`sax`
+- [Say](https://www.npmjs.com/package/say)`say`
+- [systemInformation](https://www.npmjs.com/package/systeminformation)`systeminformation`
+- [Uti](https://www.npmjs.com/package/uti)`uti`
+- [UUID](https://www.npmjs.com/package/uuid)`uuid`
 
 These modules have a lot of their own dependencies that they will also install.
 
