@@ -1,3 +1,6 @@
+const ContactsContainer = require('./contacts-container');
+const ContactsGroup = require('./contacts-group');
+
 class Contact {
   /**
    * @param {string} namePrefix 
@@ -66,21 +69,47 @@ class Contact {
     }
   }
 
+  /**
+   * @param {[ContactsContainer]} containers
+   * @returns {Promise<[Contact]>} - Promise that provides the contacts when fulfilled.
+   */
   static async all(containers) {
+    return this.all(containers)
   }
 
+  /**
+   * @param {[ContactsGroup]} groups
+   * @returns {Promise<[Contact]>} - Promise that provides the contacts when fulfilled.
+   */
   static async inGroups(groups) {
+    return this.inGroups(groups)
   }
 
+  /**
+   * @param {Contact} contact
+   * @param {string} containerIdentifier
+   */
   static add(contact, containerIdentifier) {
+    return this.add(contact, containerIdentifier)
   }
 
+  /**
+   * @param {Contact} contact
+   */
   static update(contact) {
+    return this.update(contact)
   }
 
+  /**
+   * @param {Contact} contact
+   */
   static delete(contact) {
+    return this.delete(contact)
   }
 
+  /**
+   * @returns {Promise} - Promise that fulfills when the changes have been persisted. The promise carries no value.
+   */
   static async persistChanges() {
   }
 }
