@@ -14,3 +14,4 @@ module.exports = {
     return (await this.all()).filter(container => container.identifier = identifier);
   }
 }
+module.exports = ContactsContainer;
