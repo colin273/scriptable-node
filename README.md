@@ -48,7 +48,7 @@ These modules have a lot of their own dependencies that they will also install.
 
 Import this module at the top of the script you want to test, retrieving the APIs you need like this:
 
-```
+```js
 const { Alert, Notification } = require('scriptable-node');
 ```
 
